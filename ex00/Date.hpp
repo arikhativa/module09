@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:54:42 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 14:21:26 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:33:53 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ class Date
 		unsigned int	getDate(void) const;
 		std::string		dateToString(void) const;
 
-		operator<
+		bool operator<(const Date &d) const;
+		bool operator>(const Date &d) const;
+		bool operator==(const Date &d) const;
+		bool operator!=(const Date &d) const;
 
 	private:
 		static const unsigned int	_STRING_LEN = 10;

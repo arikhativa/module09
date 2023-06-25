@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:17:17 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 14:12:14 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:34:05 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,26 @@ std::ostream &			operator<<( std::ostream & o, Date const & i )
 {
 	o << i.dateToString();
 	return o;
+}
+
+bool Date::operator<(const Date &d) const
+{
+	return getDate() < d.getDate();
+}
+
+bool Date::operator>(const Date &d) const
+{
+	return getDate() > d.getDate();
+}
+
+bool Date::operator==(const Date &d) const
+{
+	return getDate() == d.getDate();
+}
+
+bool Date::operator!=(const Date &d) const
+{
+	return getDate() != d.getDate();
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:01:18 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 14:19:14 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:54:37 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
+
+static void	validateRate(const std::string &rate)
+{
+	if (rate.find_first_not_of("0123456789.") != std::string::npos)
+		throw std::invalid_argument("Invalid rate");
+}
 
 BitcoinExchange::BitcoinExchange(const std::string &file_name)
 {
@@ -32,6 +38,7 @@ BitcoinExchange::BitcoinExchange(const std::string &file_name)
 		try
 		{
 			Date d(line.substr(0, 10));
+			validateRate(rate);
 			_exchange_rate[d] = static_cast<float>(std::strtod(rate.c_str(), NULL));
 		}
 		catch (const std::exception &e)
@@ -81,8 +88,13 @@ BitcoinExchange &				BitcoinExchange::operator=( BitcoinExchange const & rhs )
 float	BitcoinExchange::getExchangeRate(const Date &date) const
 {
 	std::map<const Date,float>::const_iterator it = _exchange_rate.lower_bound(date);
+
+	if ((it == _exchange_rate.begin()) && (it->first != date))
+		return -1;
 	if (it == _exchange_rate.end())
-		throw std::invalid_argument("No exchange rate found for this date");
+		return -1;
+	if ((it != _exchange_rate.begin()) && (it->first != date))
+		it--;
 	return it->second;
 }
 
