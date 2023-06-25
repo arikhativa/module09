@@ -6,11 +6,11 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/06/25 11:27:58 by yrabby           ###   ########.fr        #
+#    Updated: 2023/06/25 11:30:47 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 					= test
+NAME 					= btc
 
 # class
 CLASS_DIR				= .
