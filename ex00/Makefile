@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/06/25 11:30:47 by yrabby           ###   ########.fr        #
+#    Updated: 2023/06/25 14:07:04 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 					= btc
 
 # class
 CLASS_DIR				= .
-CLASS_NAME				= BitcoinExchange
+CLASS_NAME				= Date BitcoinExchange
 
 # other src
 OTHER_SRC				= 
@@ -29,7 +29,7 @@ SRC_NAME				= $(addsuffix $(SRC_SUFFIX), $(CLASS_NAME) $(SRC_MAIN) $(OTHER_SRC))
 SRC						= $(addprefix $(SRC_DIR)/, $(SRC_NAME))
 
 # other header
-OTHER_HEAD				= 
+OTHER_HEAD				= numToString
 
 # heads
 HEAD_SUFFIX				= .hpp

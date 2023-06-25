@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   numToString.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 14:20:34 by yrabby           ###   ########.fr       */
+/*   Created: 2023/06/25 13:59:26 by yrabby            #+#    #+#             */
+/*   Updated: 2023/06/25 13:59:51 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <list>
-#include <iostream>
-#include <map>
+#ifndef NUMTOSTRING_HPP
+# define NUMTOSTRING_HPP
 
-# include "BitcoinExchange.hpp"
-# include "Date.hpp"
+# include <string>
+# include <sstream>
 
-int main ()
+template <typename T>
+std::string _numToString( T num )
 {
-	BitcoinExchange b("data.csv");
-	Date d("2009-01-02");
-	b.getExchangeRate(d);
-	return 0;
-
+	std::ostringstream ss;
+	ss << num;
+	return ss.str();
 }
+
+#endif
