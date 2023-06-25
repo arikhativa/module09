@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   InputFile.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 18:16:43 by yrabby           ###   ########.fr       */
+/*   Created: 2023/06/25 17:58:28 by yrabby            #+#    #+#             */
+/*   Updated: 2023/06/25 18:12:06 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <list>
-#include <iostream>
-#include <map>
+#ifndef INPUTFILE_HPP
+# define INPUTFILE_HPP
+
+# include <iostream>
+# include <string>
+# include <fstream>
 
 # include "BitcoinExchange.hpp"
-# include "InputFile.hpp"
 # include "Date.hpp"
 
-int main (int ac, char **av)
+class InputFile
 {
-	if (ac != 2)
-	{
-		std::cout << "Usage: ./a.out <file>" << std::endl;
-		return -1;
-	}
-	BitcoinExchange b("data.csv");
-	InputFile f(av[1], b);
-	return 0;
-}
+
+	public:
+		explicit InputFile(const std::string &file_name, const BitcoinExchange &b);
+		~InputFile();
+
+	private:
+		InputFile( InputFile const & src );
+		InputFile &		operator=( InputFile const & rhs );
+	
+};
+
+#endif /* ******************************************************* INPUTFILE_H */

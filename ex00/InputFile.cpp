@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*   InputFile.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 14:01:18 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 18:01:11 by yrabby           ###   ########.fr       */
+/*   Created: 2023/06/25 17:59:42 by yrabby            #+#    #+#             */
+/*   Updated: 2023/06/25 18:19:16 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#include "InputFile.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-static void	validateRate(const std::string &rate)
+static void	validateLine(const std::string &line)
 {
-	if (rate.find_first_not_of("0123456789.") != std::string::npos)
-		throw std::invalid_argument("Invalid rate");
+	Date d(line.substr(0, 10));
+	std::string sep(line.substr(10, 3));
+	if (" | " != sep)
+	{
+		std::cout << "sep: '" << sep << "'" << std::endl;
+		throw std::invalid_argument("Invalid separator");	
+	}
+	std::string rate = line.substr(13, -1);
+	if (rate.find_first_not_of("-0123456789.") != std::string::npos)
+		throw std::invalid_argument("Invalid rate: not a number");
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &file_name)
+InputFile::InputFile(const std::string &file_name, const BitcoinExchange &b)
 {
 	std::fstream file;
 
@@ -34,26 +42,30 @@ BitcoinExchange::BitcoinExchange(const std::string &file_name)
 	std::getline(file, line);
 	while (std::getline(file, line))
 	{
-		std::string rate = line.substr(11, -1);
 		try
 		{
+			validateLine(line);
+			std::string rate_str = line.substr(13, -1);
 			Date d(line.substr(0, 10));
-			validateRate(rate);
-			_exchange_rate[d] = static_cast<float>(std::strtod(rate.c_str(), NULL));
-			if (_exchange_rate[d] < 0)
-				throw std::invalid_argument("Invalid rate");
+			float rate  = static_cast<float>(std::strtod(rate_str.c_str(), NULL));
+			if (rate < 0)
+				throw std::invalid_argument("Error: not a positive number.");
+			float exchange = b.getExchangeRate(d);
+			
+			std::cout << d << " => " << rate << " = " << rate * exchange << std::endl;
+
 		}
 		catch (const std::exception &e)
 		{
-			std::cerr << "Failed to parse line: '" << line << "' Error: " << e.what() << std::endl;
+			std::cerr << e.what() << line << std::endl;
 		}
 	}
 	file.close();
 }
 
-BitcoinExchange::BitcoinExchange( const BitcoinExchange & src )
-	: _exchange_rate(src._exchange_rate)
+InputFile::InputFile( const InputFile & src )
 {
+	(void)src;
 }
 
 
@@ -61,9 +73,8 @@ BitcoinExchange::BitcoinExchange( const BitcoinExchange & src )
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-BitcoinExchange::~BitcoinExchange()
+InputFile::~InputFile()
 {
-	_exchange_rate.clear();
 }
 
 
@@ -71,12 +82,9 @@ BitcoinExchange::~BitcoinExchange()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-BitcoinExchange &				BitcoinExchange::operator=( BitcoinExchange const & rhs )
+InputFile &				InputFile::operator=( InputFile const & rhs )
 {
-	if ( this != &rhs )
-	{
-		_exchange_rate = rhs._exchange_rate;
-	}
+	(void)rhs;
 	return *this;
 }
 
@@ -88,19 +96,6 @@ BitcoinExchange &				BitcoinExchange::operator=( BitcoinExchange const & rhs )
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
-
-float	BitcoinExchange::getExchangeRate(const Date &date) const
-{
-	std::map<const Date,float>::const_iterator it = _exchange_rate.lower_bound(date);
-
-	if ((it == _exchange_rate.begin()) && (it->first != date))
-		return -1;
-	if (it == _exchange_rate.end())
-		return -1;
-	if ((it != _exchange_rate.begin()) && (it->first != date))
-		it--;
-	return it->second;
-}
 
 
 /* ************************************************************************** */
