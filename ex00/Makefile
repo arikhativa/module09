@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/06/23 12:25:45 by yrabby           ###   ########.fr        #
+#    Updated: 2023/06/25 11:27:58 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 					= test
 
 # class
 CLASS_DIR				= .
-CLASS_NAME				= 
+CLASS_NAME				= BitcoinExchange
 
 # other src
 OTHER_SRC				= 
@@ -29,7 +29,7 @@ SRC_NAME				= $(addsuffix $(SRC_SUFFIX), $(CLASS_NAME) $(SRC_MAIN) $(OTHER_SRC))
 SRC						= $(addprefix $(SRC_DIR)/, $(SRC_NAME))
 
 # other header
-OTHER_HEAD				= MutantStack
+OTHER_HEAD				= 
 
 # heads
 HEAD_SUFFIX				= .hpp
