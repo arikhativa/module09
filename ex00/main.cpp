@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/26 09:35:48 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/26 11:56:53 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int main (int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cout << "Usage: ./a.out <file>" << std::endl;
+		std::cout << "Usage: ./btc <file>" << std::endl;
 		return -1;
 	}
 	BitcoinExchange b("data.csv");
