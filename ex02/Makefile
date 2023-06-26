@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/06/26 13:14:18 by yrabby           ###   ########.fr        #
+#    Updated: 2023/06/26 19:41:16 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 					= PmergeMe
 
 # class
 CLASS_DIR				= .
-CLASS_NAME				=  Time
+CLASS_NAME				=  Time PmergeMe
 
 # other src
 OTHER_SRC				= 
