@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/06/25 18:06:01 by yrabby           ###   ########.fr        #
+#    Updated: 2023/06/26 09:24:11 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 					= btc
 
 # class
 CLASS_DIR				= .
-CLASS_NAME				= Date BitcoinExchange InputFile
+CLASS_NAME				= Date BitcoinExchange 
 
 # other src
 OTHER_SRC				= 

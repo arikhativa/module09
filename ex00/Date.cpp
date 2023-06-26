@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:17:17 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/25 17:34:05 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/26 09:27:51 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ Date::Date(unsigned int date)
 	: _date(date)
 {
 	if (!_isValid())
-		throw std::invalid_argument("Invalid date");
+		throw std::invalid_argument("Error: bad input => " + date);
 }
 
 Date::Date(const std::string &date)
 	: _date(_stringToDate(date))
 {
 	if (!_isValid())
-		throw std::invalid_argument("Invalid date");
+		throw std::invalid_argument("Error: bad input => " + date);
 }
 
 Date::Date( const Date & src )
@@ -186,7 +186,7 @@ bool	Date::_isStringValid(const std::string &date) const
 unsigned int	Date::_stringToDate(const std::string &date) const
 {
 	if (!_isStringValid(date))
-		throw std::invalid_argument("Invalid date");
+		throw std::invalid_argument("Error: bad input => " + date);
 	return _getYear(date) * 10000 + _getMonth(date) * 100 + _getDay(date);
 } 
 
