@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:09 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/26 19:38:36 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 10:36:27 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <list>
 # include <vector>
 # include <string>
-# include <cstdlib>
+
+# include "VectorSort.hpp"
 
 class PmergeMe
 {
 	public:
-		PmergeMe();
+		PmergeMe(int ac, char **av);
 		~PmergeMe();
 		// static void	sortList(const char **numbers);
 		static std::vector<unsigned int>	sortVector(int size, char **numbers);
@@ -30,6 +31,8 @@ class PmergeMe
 	private:
 		PmergeMe( PmergeMe const & src );
 		PmergeMe &		operator=( PmergeMe const & rhs );
+
+		VectorSort _vec;
 
 };
 
