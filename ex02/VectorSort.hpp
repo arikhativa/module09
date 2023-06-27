@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 10:38:06 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 14:36:00 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 
 class VectorSort
 {
-
 	public:
 		VectorSort(int size, char **numbers);
 		~VectorSort();
 
-		void	sort(std::size_t const begin, std::size_t const end);
+		void	sort(void);
+		void	printTime(void) const;
+		void	print(void) const;
 
 	private:
 		VectorSort &		operator=( VectorSort const & rhs );

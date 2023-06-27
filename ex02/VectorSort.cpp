@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 10:34:58 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 14:37:24 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,28 @@ VectorSort &				VectorSort::operator=( VectorSort const & rhs )
 ** --------------------------------- METHODS ----------------------------------
 */
 
+void	VectorSort::sort(void)
+{
+	_t.start();
+	_vectorMergeSort(0, _vec.size() - 1);
+	_t.stop();
+}
+
+void	VectorSort::printTime(void) const
+{
+	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << _t << std::endl;
+}
+
+
+void	VectorSort::print(void) const
+{
+	for (std::vector<unsigned int>::const_iterator it = _vec.begin(); it != _vec.end(); it++)
+	{
+		std::cout << *it;
+		if (it + 1 != _vec.end())
+			std::cout << " ";
+	}
+}
 
 void VectorSort::_vectorMerge(std::size_t const left,
 						std::size_t const mid,

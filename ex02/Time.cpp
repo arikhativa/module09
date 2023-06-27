@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:19:07 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/26 13:14:27 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 14:23:06 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ Time &				Time::operator=( Time const & rhs )
 
 std::ostream &			operator<<( std::ostream & o, Time const & i )
 {
-	o << i.getDuration();
+	o << i.getDuration() << " us";
 	return o;
 }
 
