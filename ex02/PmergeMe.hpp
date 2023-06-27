@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:09 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 14:36:38 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 17:23:25 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <vector>
 # include <string>
 
+# include "ListSort.hpp"
 # include "VectorSort.hpp"
 
 class PmergeMe
@@ -30,6 +31,7 @@ class PmergeMe
 		void	sort(void);
 
 	private:
+		ListSort	_list;
 		VectorSort	_vec;
 		char		**_av;
 

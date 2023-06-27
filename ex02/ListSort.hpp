@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   VectorSort.hpp                                     :+:      :+:    :+:   */
+/*   ListSort.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 16:53:50 by yrabby           ###   ########.fr       */
+/*   Created: 2023/06/27 16:52:15 by yrabby            #+#    #+#             */
+/*   Updated: 2023/06/27 17:59:56 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORSORT_HPP
-# define VECTORSORT_HPP
+#ifndef LISTSORT_HPP
+# define LISTSORT_HPP
 
 # include <iostream>
+# include <list>
 # include <string>
-# include <vector>
 # include <cstdlib>
 
 # include "Time.hpp"
 
-class VectorSort
+class ListSort
 {
+
 	public:
-		VectorSort(int size, char **numbers);
-		~VectorSort();
+		explicit ListSort(char **numbers);
+		~ListSort();
 
 		void	sort(void);
 		void	printTime(void) const;
@@ -33,18 +34,18 @@ class VectorSort
 	private:
 		static const std::size_t _THRESHOLD = 100;
 
-		VectorSort &		operator=( VectorSort const & rhs );
-		VectorSort( VectorSort const & src );
+		std::list<unsigned int>	_list;
+		Time					_t;
+		
+		ListSort( ListSort const & src );
+		ListSort &		operator=( ListSort const & rhs );
 
-		std::vector<unsigned int> _vec;
-		Time _t;
-
-
-		void _merge(std::size_t const left, std::size_t const mid, std::size_t const right);
-		void _insertionSort(std::size_t const begin, std::size_t const end);
-		void _mergeSort(std::size_t const begin, std::size_t const end);
+		void _merge(std::list<unsigned int> &left, std::list<unsigned int> &list);
+		void _insertionSort(std::list<unsigned int> &list);
+		void _mergeSort(std::list<unsigned int> &list);
 
 };
 
+std::ostream &			operator<<( std::ostream & o, ListSort const & i );
 
-#endif /* ****************************************************** VECTORSORT_H */
+#endif /* ******************************************************** LISTSORT_H */

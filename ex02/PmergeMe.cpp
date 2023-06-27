@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:02 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 14:38:19 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 19:01:14 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 */
 
 PmergeMe::PmergeMe(int ac, char **av)
-	: _vec(ac, av), _av(av)
+	: _list(av),_vec(ac, av), _av(av)
 {
 }
 
 PmergeMe::PmergeMe( const PmergeMe & src )
-	:	_vec(0, NULL)
+	:	_list(NULL), _vec(0, NULL)
 {
 	(void)src;
 }
@@ -54,6 +54,7 @@ PmergeMe &				PmergeMe::operator=( PmergeMe const & rhs )
 
 void	PmergeMe::sort(void)
 {
+	_list.sort();
 	_vec.sort();
 }
 
@@ -73,9 +74,12 @@ void	PmergeMe::print(void) const
 	printArray(_av);
 	std::cout << std::endl;
 	std::cout << "After:\t";
-	_vec.print();
+	// _vec.print();
+	_list.print();
 	std::cout << std::endl;
 	_vec.printTime();
+	std::cout << std::endl;
+	_list.printTime();
 }
 
 /*

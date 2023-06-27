@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 14:37:24 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:55:15 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	fillVector(std::vector<unsigned int> &vec, char **numbers)
 		vec[i - 1] = tmp;
 	}
 }
-
 
 VectorSort::VectorSort(int size, char **numbers)
 	:	_vec(size - 1)
@@ -64,7 +63,7 @@ VectorSort &				VectorSort::operator=( VectorSort const & rhs )
 void	VectorSort::sort(void)
 {
 	_t.start();
-	_vectorMergeSort(0, _vec.size() - 1);
+	_mergeSort(0, _vec.size() - 1);
 	_t.stop();
 }
 
@@ -84,7 +83,7 @@ void	VectorSort::print(void) const
 	}
 }
 
-void VectorSort::_vectorMerge(std::size_t const left,
+void VectorSort::_merge(std::size_t const left,
 						std::size_t const mid,
 						std::size_t const right)
 {
@@ -129,7 +128,7 @@ void VectorSort::_vectorMerge(std::size_t const left,
 	}
 }
 
-void VectorSort::_vectorInsertionSort(std::size_t const begin, std::size_t const end)
+void VectorSort::_insertionSort(std::size_t const begin, std::size_t const end)
 {
 	unsigned int key;
 	int j;
@@ -147,20 +146,19 @@ void VectorSort::_vectorInsertionSort(std::size_t const begin, std::size_t const
 	}
 }
 
-void VectorSort::_vectorMergeSort(std::size_t const begin, std::size_t const end)
+void VectorSort::_mergeSort(std::size_t const begin, std::size_t const end)
 {
  	if (end - begin + 1 <= _THRESHOLD) {
-		_vectorInsertionSort(begin, end);
+		_insertionSort(begin, end);
 		return;
 	}
 	if (begin >= end)
 		return;
 	std::size_t mid = begin + (end - begin) / 2;
-	_vectorMergeSort(begin, mid);
-	_vectorMergeSort(mid + 1, end);
-	_vectorMerge(begin, mid, end);
+	_mergeSort(begin, mid);
+	_mergeSort(mid + 1, end);
+	_merge(begin, mid, end);
 }
-
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
