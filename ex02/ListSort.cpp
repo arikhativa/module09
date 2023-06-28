@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:55:03 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 19:00:33 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:48:03 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ListSort::print(void) const
 	}
 }
 
-void ListSort::_insertionSort(std::list<unsigned int> &list)
+void ListSort::_insertionSort(std::list<unsigned int> &list) const
 {
 	std::list<unsigned int>::iterator it = list.begin(); 
 	std::list<unsigned int>::iterator j = list.begin();
@@ -107,18 +107,6 @@ void ListSort::_insertionSort(std::list<unsigned int> &list)
 			++j;
 			*j = key;
 			++it;
-	}
-}
-
-
-
-void	sss(std::list<unsigned int> &_list)
-{
-	for (std::list<unsigned int>::const_iterator it = _list.begin(); it != _list.end(); it++)
-	{
-		std::cout << *it;
-		if (it != --(_list.end()))
-			std::cout << " ";
 	}
 }
 

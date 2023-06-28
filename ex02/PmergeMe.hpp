@@ -6,17 +6,12 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:09 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 17:23:25 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:44:40 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
-
-# include <iostream>
-# include <list>
-# include <vector>
-# include <string>
 
 # include "ListSort.hpp"
 # include "VectorSort.hpp"

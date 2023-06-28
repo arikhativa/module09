@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 16:55:15 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:46:09 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void VectorSort::_insertionSort(std::size_t const begin, std::size_t const end)
 	for (std::size_t i = begin; i < end + 1; i++)
 	{
 		key = _vec[i];
-		j = i - 1;
+		j = static_cast<int>(i) - 1;
 		while (j >= 0 && _vec[j] > key)
 		{
 			_vec[j + 1] = _vec[j];

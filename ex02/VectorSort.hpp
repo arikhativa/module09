@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 16:53:50 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:45:41 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ class VectorSort
 		std::vector<unsigned int> _vec;
 		Time _t;
 
-
 		void _merge(std::size_t const left, std::size_t const mid, std::size_t const right);
 		void _insertionSort(std::size_t const begin, std::size_t const end);
 		void _mergeSort(std::size_t const begin, std::size_t const end);
-
 };
 
 

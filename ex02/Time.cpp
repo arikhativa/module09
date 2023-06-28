@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:19:07 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 14:23:06 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:49:51 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ std::string	Time::getDuration(void) const
 {
 	__time_t sec = _end.tv_sec - _start.tv_sec;
 	__suseconds_t us = _end.tv_usec - _start.tv_usec;
+	if (us < 0)
+	{
+		--sec;
+		us += 1000000;
+	}
 
 	return _numToString<__time_t>(sec) + "." + _numToString<__time_t>(us);
 }

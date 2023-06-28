@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:02 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 19:01:14 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:45:14 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,24 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
+static void	checkNumber(char *str)
+{
+	for (int i = 0; str[i]; ++i)
+	{
+		if (!std::isdigit(str[i]))
+			throw std::invalid_argument("Invalid argument");
+	}
+}
+
 PmergeMe::PmergeMe(int ac, char **av)
 	: _list(av),_vec(ac, av), _av(av)
 {
+	++av;
+	while (*av)
+	{
+		checkNumber(*av);
+		++av;
+	}
 }
 
 PmergeMe::PmergeMe( const PmergeMe & src )
@@ -74,11 +89,9 @@ void	PmergeMe::print(void) const
 	printArray(_av);
 	std::cout << std::endl;
 	std::cout << "After:\t";
-	// _vec.print();
 	_list.print();
 	std::cout << std::endl;
 	_vec.printTime();
-	std::cout << std::endl;
 	_list.printTime();
 }
 

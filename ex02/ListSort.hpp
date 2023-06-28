@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:52:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/27 17:59:56 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:47:46 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 class ListSort
 {
-
 	public:
 		explicit ListSort(char **numbers);
 		~ListSort();
@@ -41,11 +40,8 @@ class ListSort
 		ListSort &		operator=( ListSort const & rhs );
 
 		void _merge(std::list<unsigned int> &left, std::list<unsigned int> &list);
-		void _insertionSort(std::list<unsigned int> &list);
+		void _insertionSort(std::list<unsigned int> &list) const;
 		void _mergeSort(std::list<unsigned int> &list);
-
 };
-
-std::ostream &			operator<<( std::ostream & o, ListSort const & i );
 
 #endif /* ******************************************************** LISTSORT_H */
