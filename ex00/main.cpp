@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:50:20 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 16:03:57 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,38 @@
 #include "BitcoinExchange.hpp"
 #include "Date.hpp"
 
+static ::size_t countChar(const std::string &str, char ch)
+{
+    ::size_t count = 0;
+    for (size_t i = 0; i < str.length(); ++i)
+    {
+        if (str[i] == ch)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+void validateFirstLine(const std::string &line)
+{
+    if (line != "date | value")
+        std::cerr << "Error: bad input => " << line << " (expected first line)" << std::endl;
+}
+
 void validateLine(const std::string &line)
 {
     Date d(line.substr(0, 10));
     std::string sep(line.substr(10, 3));
     if (" | " != sep)
     {
-        std::cout << "sep: '" << sep << "'" << std::endl;
-        throw std::invalid_argument("Invalid separator");
+        throw std::invalid_argument("Invalid separator. Expecting \" | \"");
     }
     std::string rate = line.substr(13, -1);
     if (rate.find_first_not_of("-0123456789.") != std::string::npos)
-        throw std::invalid_argument("Invalid rate: not a number");
+        throw std::invalid_argument("Error: bad input => " + line);
+    if (countChar(line, '.') > 1)
+        throw std::invalid_argument("Error: bad input => " + line);
 }
 
 void execFile(const std::string &file_name, const BitcoinExchange &b)
@@ -39,6 +59,7 @@ void execFile(const std::string &file_name, const BitcoinExchange &b)
 
     std::string line;
     std::getline(file, line);
+    validateFirstLine(line);
     while (std::getline(file, line))
     {
         try
@@ -77,10 +98,9 @@ int main(int ac, char **av)
         BitcoinExchange b("data.csv");
         execFile(av[1], b);
     }
-    catch (const std::exception &e)
+    catch (...)
     {
         // std::cerr << "bad db: " << e.what() << std::endl;
     }
-    (void)av;
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:54:39 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:49:20 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:51:45 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class BitcoinExchange
 
     void _validateLine(const std::string &line);
     void _validateRate(const std::string &rate);
-    void _countChar(const std::string &str, char ch);
+    ::size_t _countChar(const std::string &str, char ch);
 
     std::map<Date, float> _exchange_rate;
 };
