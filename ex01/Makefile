@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/06/26 11:33:02 by yrabby           ###   ########.fr        #
+#    Updated: 2023/10/06 16:31:11 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,6 @@ NAME 					= RPN
 CLASS_DIR				= .
 CLASS_NAME				= RPN
 
-# other src
-OTHER_SRC				= 
-
 # main
 SRC_MAIN				= main
 
@@ -27,9 +24,6 @@ SRC_SUFFIX				= .cpp
 SRC_DIR					= .
 SRC_NAME				= $(addsuffix $(SRC_SUFFIX), $(CLASS_NAME) $(SRC_MAIN) $(OTHER_SRC))
 SRC						= $(addprefix $(SRC_DIR)/, $(SRC_NAME))
-
-# other header
-OTHER_HEAD				= numToString
 
 # heads
 HEAD_SUFFIX				= .hpp
@@ -41,12 +35,9 @@ HEAD					= $(addprefix $(HEAD_DIR)/, $(HEAD_NAME))
 OBJ_DIR					= obj
 OBJ						= $(addprefix $(OBJ_DIR)/, $(SRC_NAME:.cpp=.o))
 
-# dep
-DEP						:= $(OBJ:.o=.d) $(HEAD:.hpp=.d)
-
 # flags
 CC 						= c++
-CPPFLAGS 				= -c -MMD -MP -Wshadow -Wall -Wextra -Werror  -std=c++98 -pedantic -I $(HEAD_DIR)
+CPPFLAGS 				= -c -Wshadow -Wall -Wextra -Werror  -std=c++98 -pedantic -I $(HEAD_DIR)
 
 # implicit rules
 $(addprefix $(OBJ_DIR)/, %.o): $(addprefix $(SRC_DIR)/, %.cpp) $(HEAD) 
