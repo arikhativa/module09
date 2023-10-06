@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:17:17 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:21:37 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:24:20 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 Date::Date(unsigned int date) : _date(date)
 {
     if (!_isValid())
-        throw std::invalid_argument("Error: bad input => " + date);
+        throw std::invalid_argument("Error: bad input => " + _numToString<unsigned int>(date));
 }
 
 Date::Date(const std::string &date) : _date(_stringToDate(date))

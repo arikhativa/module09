@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:01:18 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:21:35 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:24:36 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs)
 
 float BitcoinExchange::getExchangeRate(const Date &date) const
 {
-    std::map<const Date, float>::const_iterator it = _exchange_rate.lower_bound(date);
+    std::map<Date, float>::const_iterator it = _exchange_rate.lower_bound(date);
 
     if ((it == _exchange_rate.begin()) && (it->first != date))
         return -1;

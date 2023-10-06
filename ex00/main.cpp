@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:21:39 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:24:43 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "BitcoinExchange.hpp"
 #include "Date.hpp"
 
-static void validateLine(const std::string &line)
+void validateLine(const std::string &line)
 {
     Date d(line.substr(0, 10));
     std::string sep(line.substr(10, 3));
@@ -29,7 +29,7 @@ static void validateLine(const std::string &line)
         throw std::invalid_argument("Invalid rate: not a number");
 }
 
-static void execFile(const std::string &file_name, const BitcoinExchange &b)
+void execFile(const std::string &file_name, const BitcoinExchange &b)
 {
     std::fstream file;
 
@@ -72,7 +72,15 @@ int main(int ac, char **av)
         std::cout << "Usage: ./btc <file>" << std::endl;
         return -1;
     }
-    BitcoinExchange b("data.csv");
-    execFile(av[1], b);
+    try
+    {
+        BitcoinExchange b("data.csv");
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "bad db: " << e.what() << std::endl;
+    }
+    (void)av;
+    // execFile(av[1], b);
     return 0;
 }
