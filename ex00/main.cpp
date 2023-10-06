@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:24:43 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:50:20 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int main(int ac, char **av)
     try
     {
         BitcoinExchange b("data.csv");
+        execFile(av[1], b);
     }
     catch (const std::exception &e)
     {
-        std::cerr << "bad db: " << e.what() << std::endl;
+        // std::cerr << "bad db: " << e.what() << std::endl;
     }
     (void)av;
-    // execFile(av[1], b);
     return 0;
 }

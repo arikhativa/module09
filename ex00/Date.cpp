@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:17:17 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:24:20 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:41:42 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,11 @@ bool Date::_isValid(void) const
     if (year < 1)
         return false;
 
-    bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    unsigned int daysInMonth[] = {31, 28 + static_cast<unsigned int>(isLeapYear), 31, 30, 31, 30, 31, 31, 30, 31, 30,
-                                  31};
+    bool is_leap_year = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    unsigned int days_in_month[] = {
+        31, 28 + static_cast<unsigned int>(is_leap_year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    return day <= daysInMonth[month - 1];
+    return day <= days_in_month[month - 1];
 }
 
 unsigned int Date::_getDay(void) const
