@@ -6,37 +6,36 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:23:42 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/26 13:13:35 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 16:38:39 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TIME_HPP
-# define TIME_HPP
+#define TIME_HPP
 
-# include <iostream>
-# include <string>
-# include <sys/time.h>
+#include <iostream>
+#include <string>
+#include <sys/time.h>
 
 class Time
 {
 
-	public:
-		Time();
-		Time( Time const & src );
-		~Time();
+  public:
+    Time();
+    Time(Time const &src);
+    ~Time();
 
-		Time &		operator=( Time const & rhs );
+    Time &operator=(Time const &rhs);
 
-		void		start(void);
-		void		stop(void);
-		std::string	getDuration(void) const;
+    void start(void);
+    void stop(void);
+    std::string getDuration(void) const;
 
-	private:
-		struct timeval	_start;
-		struct timeval	_end;
-
+  private:
+    struct timeval _start;
+    struct timeval _end;
 };
 
-std::ostream &			operator<<( std::ostream & o, Time const & i );
+std::ostream &operator<<(std::ostream &o, Time const &i);
 
 #endif /* ************************************************************ TIME_H */

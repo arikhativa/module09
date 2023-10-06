@@ -6,22 +6,21 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:59:26 by yrabby            #+#    #+#             */
-/*   Updated: 2023/06/26 12:16:26 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 16:38:49 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NUMTOSTRING_HPP
-# define NUMTOSTRING_HPP
+#define NUMTOSTRING_HPP
 
-# include <string>
-# include <sstream>
+#include <sstream>
+#include <string>
 
-template <typename T>
-std::string _numToString( T num )
+template <typename T> std::string _numToString(T num)
 {
-	std::ostringstream ss;
-	ss << num;
-	return ss.str();
+    std::ostringstream ss;
+    ss << num;
+    return ss.str();
 }
 
 #endif
