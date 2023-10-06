@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:01:18 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 15:49:34 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/06 16:28:31 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,6 @@ float BitcoinExchange::getExchangeRate(const Date &date) const
 
     if ((it == _exchange_rate.begin()) && (it->first != date))
         return -1;
-    if (it == _exchange_rate.end())
-        it--;
     if ((it != _exchange_rate.begin()) && (it->first != date))
         it--;
     return it->second;
