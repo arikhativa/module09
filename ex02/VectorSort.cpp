@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 16:38:38 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:13:01 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void fillVector(std::vector<unsigned int> &vec, char **numbers)
 {
     for (unsigned int i = 1; numbers[i]; i++)
     {
-        unsigned int tmp = static_cast<unsigned int>(std::atol(numbers[i]));
+        unsigned int tmp = static_cast<unsigned int>(::atol(numbers[i]));
         vec[i - 1] = tmp;
     }
 }
 
-VectorSort::VectorSort(int size, char **numbers) : _vec(size - 1)
+VectorSort::VectorSort(int size, char **numbers) : _vec(size)
 {
     fillVector(_vec, numbers);
 }
@@ -60,7 +60,7 @@ VectorSort &VectorSort::operator=(VectorSort const &rhs)
 void VectorSort::sort(void)
 {
     _t.start();
-    _mergeSort(0, _vec.size() - 1);
+    _mergeInsertSort();
     _t.stop();
 }
 
@@ -79,50 +79,7 @@ void VectorSort::print(void) const
     }
 }
 
-void VectorSort::_merge(std::size_t const left, std::size_t const mid, std::size_t const right)
-{
-
-    std::vector<unsigned int> sub_left(mid - left + 1);
-    std::vector<unsigned int> sub_right(right - mid);
-
-    for (std::size_t i = 0; i < sub_left.size(); ++i)
-        sub_left[i] = _vec[left + i];
-    for (std::size_t i = 0; i < sub_right.size(); ++i)
-        sub_right[i] = _vec[mid + 1 + i];
-
-    std::size_t sub_left_index = 0;
-    std::size_t sub_right_index = 0;
-    std::size_t main_index = left;
-
-    while (sub_left_index < sub_left.size() && sub_right_index < sub_right.size())
-    {
-        if (sub_left[sub_left_index] < sub_right[sub_right_index])
-        {
-            _vec[main_index] = sub_left[sub_left_index];
-            ++sub_left_index;
-        }
-        else
-        {
-            _vec[main_index] = sub_right[sub_right_index];
-            ++sub_right_index;
-        }
-        ++main_index;
-    }
-    while (sub_left_index < sub_left.size())
-    {
-        _vec[main_index] = sub_left[sub_left_index];
-        ++sub_left_index;
-        ++main_index;
-    }
-    while (sub_right_index < sub_right.size())
-    {
-        _vec[main_index] = sub_right[sub_right_index];
-        ++sub_right_index;
-        ++main_index;
-    }
-}
-
-void VectorSort::_insertionSort(std::size_t const begin, std::size_t const end)
+void void VectorSort::_insertionSort(std::size_t const begin, std::size_t const end)
 {
     unsigned int key;
     int j;
@@ -140,19 +97,9 @@ void VectorSort::_insertionSort(std::size_t const begin, std::size_t const end)
     }
 }
 
-void VectorSort::_mergeSort(std::size_t const begin, std::size_t const end)
+void VectorSort::_mergeInsertSort(void)
 {
-    if (end - begin + 1 <= _THRESHOLD)
-    {
-        _insertionSort(begin, end);
-        return;
-    }
-    if (begin >= end)
-        return;
-    std::size_t mid = begin + (end - begin) / 2;
-    _mergeSort(begin, mid);
-    _mergeSort(mid + 1, end);
-    _merge(begin, mid, end);
+    _createPairs();
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:02 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 16:38:46 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:10:29 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void checkNumber(char *str)
     }
 }
 
-PmergeMe::PmergeMe(int ac, char **av) : _list(av), _vec(ac, av), _av(av)
+PmergeMe::PmergeMe(int ac, char **av) : _list(av), _vec(ac - 1, av), _av(av)
 {
     ++av;
     while (*av)
@@ -64,7 +64,7 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
 
 void PmergeMe::sort(void)
 {
-    _list.sort();
+    // _list.sort();
     _vec.sort();
 }
 
@@ -84,10 +84,11 @@ void PmergeMe::print(void) const
     printArray(_av);
     std::cout << std::endl;
     std::cout << "After:\t";
-    _list.print();
+    // _list.print();
+    _vec.print();
     std::cout << std::endl;
     _vec.printTime();
-    _list.printTime();
+    // _list.printTime();
 }
 
 /*

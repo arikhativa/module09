@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 16:38:36 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:12:28 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,14 @@ class VectorSort
     void print(void) const;
 
   private:
-    static const std::size_t _THRESHOLD = 100;
-
     VectorSort &operator=(VectorSort const &rhs);
     VectorSort(VectorSort const &src);
 
     std::vector<unsigned int> _vec;
     Time _t;
 
-    void _merge(std::size_t const left, std::size_t const mid, std::size_t const right);
+    void _mergeInsertSort(void);
     void _insertionSort(std::size_t const begin, std::size_t const end);
-    void _mergeSort(std::size_t const begin, std::size_t const end);
 };
 
 #endif /* ****************************************************** VECTORSORT_H */
