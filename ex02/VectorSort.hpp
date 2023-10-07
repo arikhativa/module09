@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 15:14:00 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 17:33:16 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <utility>
 #include <vector>
 
+#include "Jacobsthal.hpp"
 #include "Time.hpp"
 
 class VectorSort
@@ -45,6 +46,7 @@ class VectorSort
 	void _sortBIntoA(void);
 	void _returnA(void);
 	void _returnB(void);
+	void _binaryInsert(unsigned int num, ::size_t i);
 	void _mergeInsertSort(void);
 	void _insertionSortRecursive(const ::ssize_t n);
 };

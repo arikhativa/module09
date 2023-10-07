@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 15:45:02 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 18:21:28 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void swap(std::pair< unsigned int, unsigned int > &p)
 
 void VectorSort::_sortPairs(void)
 {
-	for (::size_t i = 0; i < _vec.size(); i += 2)
+	for (::size_t i = 0; i < _vec.size(); ++i)
 	{
 		std::pair< unsigned int, unsigned int > &p(_pairs[i]);
 		if (p.first < p.second)
@@ -153,31 +153,28 @@ void printVector(const std::vector< T > &vec)
 
 void VectorSort::_returnA(void)
 {
-	std::vector< unsigned int >::iterator it_vec(_vec.begin());
-	std::vector< std::pair< unsigned int, unsigned int > >::iterator it_pair(_pairs.begin());
+	std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
 
-	std::fill(_vec.begin(), _vec.end(), 0);
-	for (::size_t i = 0; i < (_vec.size() / 2); ++i)
+	_vec.clear();
+	for (::size_t i = 0; i < _pairs.size(); ++i)
 	{
-		*it_vec = it_pair->first;
-		++it_pair;
-		++it_vec;
+		_vec.insert(_vec.begin() + i, it->first);
+		++it;
 	}
 }
 
-void VectorSort::_binaryInsert(unsigned int num, ::size_t i, ::size_t left, ::size_t right)
-{
-	::size_t pos = binarySearch(_vec, num, left, right);
-
-	// _vec.insert(_vec.begin() + min - 1, _pairs.begin()->second);
-}
-
-::size_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::size_t left, ::size_t right)
+::ssize_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::ssize_t left, ::ssize_t right)
 {
 	if (right <= left)
 		return (target > vec[left]) ? (left + 1) : left;
 
-	::size_t mid = (left + right) / 2;
+	::ssize_t mid = (left + right) / 2;
+	if (mid >= vec.size())
+	{
+		std::cout << "left: " << left << std::endl;
+		std::cout << "right: " << right << std::endl;
+		std::cout << "ERR: " << mid << std::endl;
+	}
 
 	if (target == vec[mid])
 		return mid + 1;
@@ -188,30 +185,78 @@ void VectorSort::_binaryInsert(unsigned int num, ::size_t i, ::size_t left, ::si
 	return binarySearch(vec, target, left, mid - 1);
 }
 
-// TODO think of num 2!
+void VectorSort::_binaryInsert(unsigned int num, ::size_t i)
+{
+	// std::cout << std::endl << " - _binaryInsert - " << std::endl;
+	// printVector(_pairs);
+	// printVector(_vec);
+
+	::size_t right = _vec.size() - 1;
+	// std::cout << "i: " << i << std::endl;
+	// std::cout << "num: " << num << std::endl;
+	// std::cout << "right: " << right << std::endl;
+	::ssize_t pos = binarySearch(_vec, num, 0, right);
+	// std::cout << "pos: " << pos << std::endl;
+
+	_vec.insert(_vec.begin() + pos, num);
+	// std::cout << " ---------------------------- " << std::endl << std::endl;
+}
+
+// TODO think of size 2!
 void VectorSort::_returnB(void)
 {
-	_vec.insert(_vec.begin(), _pairs.begin()->second);
-
 	::size_t jacob_index = 3;
-	::size_t min_limit = 1;
-	::size_t i = 3;
+	::size_t min_limit = Jacobsthal::getIndex(jacob_index - 1);
+	::size_t i = Jacobsthal::getIndex(jacob_index) - 1;
+
+	std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
+	_vec.insert(_vec.begin(), it->first);
+	_vec.insert(_vec.begin(), it->second);
+	printVector(_vec);
+
 	while (i < _pairs.size())
 	{
-		std::pair< unsigned int, unsigned int > p(_pairs.begin() + i);
+		it = _pairs.begin() + i;
 
-		_binaryInsert(p->second, i, min_limit, jacob_index);
+		std::cout << " ---------------------------- " << std::endl << std::endl;
+		std::cout << "i: " << i << std::endl;
+		std::cout << "it->second: " << it->second << std::endl;
+
+		_binaryInsert(it->second, i);
+		_binaryInsert(it->first, i);
+		if (i > min_limit)
+		{
+			--i;
+		}
+		else
+		{
+			++jacob_index;
+			min_limit = Jacobsthal::getIndex(jacob_index - 1);
+			i = Jacobsthal::getIndex(jacob_index) - 1;
+			if (min_limit >= _pairs.size())
+			{
+				break;
+			}
+			while (i > _pairs.size())
+				--i;
+			std::cout << "\tjacob_index: " << jacob_index << std::endl;
+			std::cout << "\tmin_limit: " << min_limit << std::endl;
+			std::cout << "\ti: " << i << std::endl;
+		}
+		std::cout << " ---------------------------- " << std::endl << std::endl;
 	}
 }
 
 void VectorSort::_mergeInsertSort(void)
 {
+	printVector(_vec);
 	_createPairs();
 	_sortPairs();
 	_sortAList();
-	_returnA();
+	// _returnA();
+	_vec.clear();
+
 	_returnB();
-	printVector(_pairs);
 	printVector(_vec);
 }
 

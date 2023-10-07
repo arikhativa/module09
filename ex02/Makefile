@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:56:52 by yrabby            #+#    #+#              #
-#    Updated: 2023/10/07 15:08:28 by yrabby           ###   ########.fr        #
+#    Updated: 2023/10/07 18:10:44 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ DEP						:= $(OBJ:.o=.d) $(HEAD:.hpp=.d)
 
 # flags
 CC 						= c++
-CPPFLAGS 				= -c -MMD -MP -Wshadow -Wall -Wextra -Werror  -std=c++98 -pedantic -I $(HEAD_DIR)
+CPPFLAGS 				= -c  -std=c++98 -pedantic -I $(HEAD_DIR)
+# CPPFLAGS 				= -c -MMD -MP -Wshadow -Wall -Wextra -Werror  -std=c++98 -pedantic -I $(HEAD_DIR)
 
 # implicit rules
 $(addprefix $(OBJ_DIR)/, %.o): $(addprefix $(SRC_DIR)/, %.cpp) $(HEAD) 

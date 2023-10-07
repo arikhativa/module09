@@ -6,11 +6,11 @@
 class Jacobsthal
 {
   public:
-	~Jacobsthal();
 	static ::size_t getIndex(::size_t i);
 
   private:
 	Jacobsthal();
+	~Jacobsthal();
 	Jacobsthal &operator=(Jacobsthal const &rhs);
 	Jacobsthal(Jacobsthal const &src);
 };

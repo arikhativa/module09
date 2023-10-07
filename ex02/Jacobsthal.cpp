@@ -34,13 +34,27 @@ Jacobsthal &Jacobsthal::operator=(Jacobsthal const &rhs)
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
-::size_t getIndex(::size_t i)
+::size_t Jacobsthal::getIndex(::size_t i)
 {
 	if (i == 0)
-		return 1;
+		return 0;
 	else if (i == 1)
 		return 1;
-	return i + 2 * (i - 1);
+	else
+	{
+		size_t j_n_minus_1 = 1;
+		size_t j_n_minus_2 = 0;
+		size_t j_n;
+
+		for (size_t n = 2; n <= i; ++n)
+		{
+			j_n = j_n_minus_1 + 2 * j_n_minus_2;
+			j_n_minus_2 = j_n_minus_1;
+			j_n_minus_1 = j_n;
+		}
+
+		return j_n;
+	}
 }
 
 /*
