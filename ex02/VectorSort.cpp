@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 18:32:52 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 18:44:14 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void VectorSort::_sortPairs(void)
 	}
 }
 
-void VectorSort::_sortAList(void)
+void VectorSort::_sortByAList(void)
 {
 	_insertionSortRecursive(_pairs.size());
 }
@@ -151,29 +151,16 @@ void printVector(const std::vector< T > &vec)
 	std::cout << std::endl;
 }
 
-void VectorSort::_returnA(void)
-{
-	std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
-
-	_vec.clear();
-	for (::size_t i = 0; i < _pairs.size(); ++i)
-	{
-		_vec.insert(_vec.begin() + i, it->first);
-		++it;
-	}
-}
-
+// TODO check err
 ::ssize_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::ssize_t left, ::ssize_t right)
 {
 	if (right <= left)
 		return (target > vec[left]) ? (left + 1) : left;
 
 	::ssize_t mid = (left + right) / 2;
-	if (mid >= vec.size())
+	if (mid >= static_cast< ::ssize_t >(vec.size()))
 	{
-		std::cout << "left: " << left << std::endl;
-		std::cout << "right: " << right << std::endl;
-		std::cout << "ERR: " << mid << std::endl;
+		std::cerr << "ERR: " << mid << std::endl;
 	}
 
 	if (target == vec[mid])
@@ -185,16 +172,15 @@ void VectorSort::_returnA(void)
 	return binarySearch(vec, target, left, mid - 1);
 }
 
-void VectorSort::_binaryInsert(unsigned int num, ::size_t i)
+void VectorSort::_binaryInsert(unsigned int num)
 {
-	::size_t right = _vec.size() - 1;
-	::ssize_t pos = binarySearch(_vec, num, 0, right);
+	::ssize_t pos = binarySearch(_vec, num, 0, _vec.size() - 1);
 
 	_vec.insert(_vec.begin() + pos, num);
 }
 
 // TODO think of size 2!
-void VectorSort::_returnB(void)
+void VectorSort::_mergeBackPairs(void)
 {
 	::size_t jacob_index = 3;
 	::size_t min_limit = Jacobsthal::getIndex(jacob_index - 1) - 1;
@@ -203,14 +189,15 @@ void VectorSort::_returnB(void)
 	std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
 	_vec.insert(_vec.begin(), it->first);
 	_vec.insert(_vec.begin(), it->second);
-	while (i < _pairs.size())
+
+	while (true)
 	{
 		it = _pairs.begin() + i;
 
 		if (i > min_limit)
 		{
-			_binaryInsert(it->second, i);
-			_binaryInsert(it->first, i);
+			_binaryInsert(it->second);
+			_binaryInsert(it->first);
 			--i;
 		}
 		else
@@ -228,17 +215,30 @@ void VectorSort::_returnB(void)
 	}
 }
 
+void VectorSort::_simpleMergeBackPairs(void)
+{
+	::size_t i = 0;
+	while (i < _pairs.size())
+	{
+		std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin() + i);
+		_binaryInsert(it->second);
+		_binaryInsert(it->first);
+		++i;
+	}
+}
+
 void VectorSort::_mergeInsertSort(void)
 {
-	printVector(_vec);
 	_createPairs();
 	_sortPairs();
-	_sortAList();
-	// _returnA();
+	_sortByAList();
 	_vec.clear();
-	printVector(_pairs);
-	_returnB();
+	if (_pairs.size() > 6)
+		_mergeBackPairs();
+	else
+		_simpleMergeBackPairs();
 	printVector(_vec);
+	_pairs.clear();
 }
 
 /*

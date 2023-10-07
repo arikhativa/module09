@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 17:33:16 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 18:41:42 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ class VectorSort
 
 	void _createPairs(void);
 	void _sortPairs(void);
-	void _sortAList(void);
+	void _sortByAList(void);
 	void _sortBIntoA(void);
-	void _returnA(void);
-	void _returnB(void);
-	void _binaryInsert(unsigned int num, ::size_t i);
+	void _mergeBackPairs(void);
+	void _simpleMergeBackPairs(void);
+	void _binaryInsert(unsigned int num);
 	void _mergeInsertSort(void);
 	void _insertionSortRecursive(const ::ssize_t n);
 };
