@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 13:11:37 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 15:14:00 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ class VectorSort
 	void _createPairs(void);
 	void _sortPairs(void);
 	void _sortAList(void);
+	void _sortBIntoA(void);
+	void _returnA(void);
+	void _returnB(void);
 	void _mergeInsertSort(void);
 	void _insertionSortRecursive(const ::ssize_t n);
 };

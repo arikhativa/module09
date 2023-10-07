@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 13:18:36 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/07 15:45:02 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,13 +151,68 @@ void printVector(const std::vector< T > &vec)
 	std::cout << std::endl;
 }
 
+void VectorSort::_returnA(void)
+{
+	std::vector< unsigned int >::iterator it_vec(_vec.begin());
+	std::vector< std::pair< unsigned int, unsigned int > >::iterator it_pair(_pairs.begin());
+
+	std::fill(_vec.begin(), _vec.end(), 0);
+	for (::size_t i = 0; i < (_vec.size() / 2); ++i)
+	{
+		*it_vec = it_pair->first;
+		++it_pair;
+		++it_vec;
+	}
+}
+
+void VectorSort::_binaryInsert(unsigned int num, ::size_t i, ::size_t left, ::size_t right)
+{
+	::size_t pos = binarySearch(_vec, num, left, right);
+
+	// _vec.insert(_vec.begin() + min - 1, _pairs.begin()->second);
+}
+
+::size_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::size_t left, ::size_t right)
+{
+	if (right <= left)
+		return (target > vec[left]) ? (left + 1) : left;
+
+	::size_t mid = (left + right) / 2;
+
+	if (target == vec[mid])
+		return mid + 1;
+
+	if (target > vec[mid])
+		return binarySearch(vec, target, mid + 1, right);
+
+	return binarySearch(vec, target, left, mid - 1);
+}
+
+// TODO think of num 2!
+void VectorSort::_returnB(void)
+{
+	_vec.insert(_vec.begin(), _pairs.begin()->second);
+
+	::size_t jacob_index = 3;
+	::size_t min_limit = 1;
+	::size_t i = 3;
+	while (i < _pairs.size())
+	{
+		std::pair< unsigned int, unsigned int > p(_pairs.begin() + i);
+
+		_binaryInsert(p->second, i, min_limit, jacob_index);
+	}
+}
+
 void VectorSort::_mergeInsertSort(void)
 {
 	_createPairs();
 	_sortPairs();
 	_sortAList();
+	_returnA();
+	_returnB();
 	printVector(_pairs);
-	// _sortBIntoA();
+	printVector(_vec);
 }
 
 /*
