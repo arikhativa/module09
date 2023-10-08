@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 18:41:42 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 12:08:35 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class VectorSort
 
 	std::vector< unsigned int > _vec;
 	std::vector< std::pair< unsigned int, unsigned int > > _pairs;
+	ssize_t _straggler;
 	Time _t;
 
 	void _createPairs(void);

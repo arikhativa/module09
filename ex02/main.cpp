@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 12:59:04 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 12:08:28 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av)
 	{
 		PmergeMe pm(ac, av);
 		pm.sort();
-		// pm.print();
+		pm.print();
 	}
 	catch (std::exception &e)
 	{

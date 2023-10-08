@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:09 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 16:38:44 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 12:08:31 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 class PmergeMe
 {
   public:
-    PmergeMe(int ac, char **av);
-    ~PmergeMe();
+	PmergeMe(int ac, char **av);
+	~PmergeMe();
 
-    void print(void) const;
-    void sort(void);
+	void print(void) const;
+	void sort(void);
 
   private:
-    ListSort _list;
-    VectorSort _vec;
-    char **_av;
+	ListSort _list;
+	VectorSort _vec;
+	char **_av;
 
-    PmergeMe(PmergeMe const &src);
-    PmergeMe &operator=(PmergeMe const &rhs);
+	PmergeMe(PmergeMe const &src);
+	PmergeMe &operator=(PmergeMe const &rhs);
 };
 
 #endif /* ******************************************************** PMERGEME_H */

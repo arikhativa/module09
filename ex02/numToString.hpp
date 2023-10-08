@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:59:26 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 16:38:49 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 12:08:29 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include <sstream>
 #include <string>
 
-template <typename T> std::string _numToString(T num)
+template < typename T >
+std::string _numToString(T num)
 {
-    std::ostringstream ss;
-    ss << num;
-    return ss.str();
+	std::ostringstream ss;
+	ss << num;
+	return ss.str();
 }
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/07 18:44:14 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 12:08:34 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void fillVector(std::vector< unsigned int > &vec, char **numbers)
 VectorSort::VectorSort(int size, char **numbers)
 	: _vec(size)
 	, _pairs(size / 2)
+	, _straggler(-1)
 {
 	fillVector(_vec, numbers);
 }
@@ -98,20 +99,13 @@ void VectorSort::_createPairs(void)
 	}
 }
 
-void swap(std::pair< unsigned int, unsigned int > &p)
-{
-	unsigned int tmp = p.first;
-	p.first = p.second;
-	p.second = tmp;
-}
-
 void VectorSort::_sortPairs(void)
 {
 	for (::size_t i = 0; i < _vec.size(); ++i)
 	{
 		std::pair< unsigned int, unsigned int > &p(_pairs[i]);
 		if (p.first < p.second)
-			swap(p);
+			std::swap(p.first, p.second);
 	}
 }
 
@@ -138,30 +132,12 @@ void VectorSort::_insertionSortRecursive(::ssize_t n)
 	_pairs[j + 1] = last;
 }
 
-template < typename T >
-void printVector(const std::vector< T > &vec)
-{
-	typename std::vector< T >::const_iterator it;
-
-	for (it = vec.begin(); it != vec.end(); ++it)
-	{
-		std::cout << *it << " ";
-	}
-
-	std::cout << std::endl;
-}
-
-// TODO check err
 ::ssize_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::ssize_t left, ::ssize_t right)
 {
 	if (right <= left)
 		return (target > vec[left]) ? (left + 1) : left;
 
 	::ssize_t mid = (left + right) / 2;
-	if (mid >= static_cast< ::ssize_t >(vec.size()))
-	{
-		std::cerr << "ERR: " << mid << std::endl;
-	}
 
 	if (target == vec[mid])
 		return mid + 1;
@@ -179,7 +155,6 @@ void VectorSort::_binaryInsert(unsigned int num)
 	_vec.insert(_vec.begin() + pos, num);
 }
 
-// TODO think of size 2!
 void VectorSort::_mergeBackPairs(void)
 {
 	::size_t jacob_index = 3;
@@ -217,10 +192,14 @@ void VectorSort::_mergeBackPairs(void)
 
 void VectorSort::_simpleMergeBackPairs(void)
 {
-	::size_t i = 0;
+	std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
+	_vec.insert(_vec.begin(), it->first);
+	_vec.insert(_vec.begin(), it->second);
+
+	::size_t i = 1;
 	while (i < _pairs.size())
 	{
-		std::vector< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin() + i);
+		it = _pairs.begin() + i;
 		_binaryInsert(it->second);
 		_binaryInsert(it->first);
 		++i;
@@ -229,15 +208,27 @@ void VectorSort::_simpleMergeBackPairs(void)
 
 void VectorSort::_mergeInsertSort(void)
 {
+	if (_vec.size() % 2 != 0)
+	{
+		_straggler = static_cast< ::ssize_t >(_vec.back());
+		_vec.pop_back();
+	}
+
 	_createPairs();
 	_sortPairs();
 	_sortByAList();
+
 	_vec.clear();
-	if (_pairs.size() > 6)
+
+	if (_pairs.size() > 3)
 		_mergeBackPairs();
 	else
 		_simpleMergeBackPairs();
-	printVector(_vec);
+
+	if (_straggler != -1)
+		_binaryInsert(static_cast< unsigned int >(_straggler));
+
+	_straggler = -1;
 	_pairs.clear();
 }
 
