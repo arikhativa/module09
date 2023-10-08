@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:08:34 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 12:25:26 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ void VectorSort::_createPairs(void)
 
 void VectorSort::_sortPairs(void)
 {
-	for (::size_t i = 0; i < _vec.size(); ++i)
+	std::pair< unsigned int, unsigned int > &p(_pairs[0]);
+
+	for (::size_t i = 0; i < _pairs.size(); ++i)
 	{
-		std::pair< unsigned int, unsigned int > &p(_pairs[i]);
+		p = _pairs[i];
 		if (p.first < p.second)
 			std::swap(p.first, p.second);
 	}
