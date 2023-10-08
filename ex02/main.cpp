@@ -6,11 +6,17 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:55:51 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:25:32 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 14:28:24 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+std::ostream &operator<<(std::ostream &os, const std::pair< unsigned int, unsigned int > &p)
+{
+	os << "(" << p.first << ", " << p.second << ")";
+	return os;
+}
 
 int main(int ac, char **av)
 {

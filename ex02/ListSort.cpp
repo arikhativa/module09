@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:55:03 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:08:26 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 14:29:17 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 */
 
 ListSort::ListSort(char **numbers)
+	: _straggler(-1)
 {
 	for (unsigned int i = 1; numbers[i]; i++)
 	{
@@ -36,6 +37,8 @@ ListSort::ListSort(const ListSort &src)
 
 ListSort::~ListSort()
 {
+	_list.clear();
+	_pairs.clear();
 }
 
 /*
@@ -55,7 +58,7 @@ ListSort &ListSort::operator=(ListSort const &rhs)
 void ListSort::sort(void)
 {
 	_t.start();
-	_mergeSort(_list);
+	_mergeInsertSort();
 	_t.stop();
 }
 
@@ -74,88 +77,155 @@ void ListSort::print(void) const
 	}
 }
 
-void ListSort::_insertionSort(std::list< unsigned int > &list) const
+void ListSort::_createPairs(void)
 {
-	std::list< unsigned int >::iterator it = list.begin();
-	std::list< unsigned int >::iterator j = list.begin();
-	std::list< unsigned int >::iterator tmp = list.begin();
-	++it;
+	unsigned int a;
+	unsigned int b;
 
-	while (it != list.end())
+	while (_list.size())
 	{
-		unsigned int key = *it;
-		j = it;
-		--j;
-		while (j != list.begin() && *j > key)
-		{
-			tmp = j;
-			++tmp;
-			std::iter_swap(j, tmp);
-			--j;
-		}
-
-		if (*j > key)
-		{
-			tmp = j;
-			++tmp;
-			std::iter_swap(j, tmp);
-			--j;
-		}
-		++j;
-		*j = key;
-		++it;
+		a = _list.back();
+		_list.pop_back();
+		b = _list.back();
+		_list.pop_back();
+		std::pair< unsigned int, unsigned int > p(a, b);
+		if (p.first < p.second)
+			std::swap(p.first, p.second);
+		_pairs.push_front(p);
 	}
 }
 
-void ListSort::_merge(std::list< unsigned int > &left, std::list< unsigned int > &list)
+void ListSort::_sortByAList(void)
 {
-	std::list< unsigned int >::iterator it_left = left.begin();
-	std::list< unsigned int >::iterator tmp = left.begin();
-	std::list< unsigned int >::iterator it_main = list.begin();
-
-	while (it_left != left.end() && it_main != list.end())
+	std::list< std::pair< unsigned int, unsigned int > >::iterator it = _pairs.begin();
+	for (; it != _pairs.end(); ++it)
 	{
-		if (*it_left < *it_main)
+		_insertionSortRecursive(it);
+	}
+}
+
+void ListSort::_insertionSortRecursive(std::list< std::pair< unsigned int, unsigned int > >::iterator it)
+{
+	if (it == _pairs.begin())
+		return;
+
+	std::list< std::pair< unsigned int, unsigned int > >::iterator prev = it;
+	--prev;
+
+	if (*it < *prev)
+	{
+		std::swap(*it, *prev);
+		_insertionSortRecursive(prev);
+	}
+}
+
+// TODO not static and remove &list
+static ssize_t binarySearch(const std::list< unsigned int > &list, unsigned int target, ssize_t left, ssize_t right)
+{
+	if (right <= left)
+		return (target > *std::next(list.begin(), left)) ? (left + 1) : left;
+
+	ssize_t mid = (left + right) / 2;
+	std::list< unsigned int >::const_iterator midIterator = std::next(list.begin(), mid);
+
+	if (target == *midIterator)
+		return mid + 1;
+
+	if (target > *midIterator)
+		return binarySearch(list, target, mid + 1, right);
+
+	return binarySearch(list, target, left, mid - 1);
+}
+
+void ListSort::_binaryInsert(unsigned int num)
+{
+	::ssize_t pos = binarySearch(_list, num, 0, _list.size() - 1);
+
+	std::list< unsigned int >::iterator it = _list.begin();
+	std::advance(it, pos);
+
+	_list.insert(it, num);
+}
+
+void ListSort::_mergeBackPairs(void)
+{
+	::size_t jacob_index = 3;
+	::size_t min_limit = Jacobsthal::getIndex(jacob_index - 1) - 1;
+	::size_t i = Jacobsthal::getIndex(jacob_index) - 1;
+
+	std::list< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
+	_list.push_front(it->first);
+	_list.push_front(it->second);
+
+	while (true)
+	{
+		it = _pairs.begin();
+		std::advance(it, i);
+
+		if (i > min_limit)
 		{
-			tmp = left.erase(it_left);
-			list.insert(it_main, *it_left);
-			it_left = tmp;
+			_binaryInsert(it->second);
+			_binaryInsert(it->first);
+			--i;
 		}
 		else
-			++it_main;
-	}
-	while (it_left != left.end())
-	{
-		tmp = left.erase(it_left);
-		list.push_back(*it_left);
-		it_left = tmp;
+		{
+			++jacob_index;
+			min_limit = Jacobsthal::getIndex(jacob_index - 1) - 1;
+			i = Jacobsthal::getIndex(jacob_index) - 1;
+			if (min_limit >= _pairs.size() - 1)
+			{
+				break;
+			}
+			while (i > _pairs.size() - 1)
+				--i;
+		}
 	}
 }
 
-void ListSort::_mergeSort(std::list< unsigned int > &list)
+void ListSort::_simpleMergeBackPairs(void)
 {
-	std::size_t size = list.size();
+	std::list< std::pair< unsigned int, unsigned int > >::iterator it(_pairs.begin());
+	_list.push_front(it->first);
+	_list.push_front(it->second);
 
-	if (size <= _THRESHOLD)
+	::size_t i = 1;
+	while (i < _pairs.size())
 	{
-		_insertionSort(list);
-		return;
+		it = _pairs.begin();
+		std::advance(it, i);
+		_binaryInsert(it->second);
+		_binaryInsert(it->first);
+		++i;
+	}
+}
+
+void ListSort::_mergeInsertSort(void)
+{
+	if (_list.size() % 2 != 0)
+	{
+		_straggler = static_cast< ::ssize_t >(_list.back());
+		_list.pop_back();
 	}
 
-	if (list.size() <= 1)
-		return;
+	printList< unsigned int >(_list);
+	_createPairs();
+	printList< std::pair< unsigned int, unsigned int > >(_pairs);
+	_sortByAList();
+	printList< std::pair< unsigned int, unsigned int > >(_pairs);
 
-	std::size_t mid = size / 2;
-	std::list< unsigned int > left;
-	std::list< unsigned int > right;
+	if (_pairs.size() > 3)
+		_mergeBackPairs();
+	else
+		_simpleMergeBackPairs();
 
-	std::list< unsigned int >::iterator it = list.begin();
-	std::advance(it, mid);
-	left.splice(left.begin(), list, list.begin(), it);
+	if (_straggler != -1)
+		_binaryInsert(static_cast< unsigned int >(_straggler));
 
-	_mergeSort(left);
-	_mergeSort(list);
-	_merge(left, list);
+	printList< unsigned int >(_list);
+
+	_straggler = -1;
+	_pairs.clear();
 }
 
 /*

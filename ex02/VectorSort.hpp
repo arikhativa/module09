@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:08:35 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 13:51:30 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ class VectorSort
 	Time _t;
 
 	void _createPairs(void);
-	void _sortPairs(void);
 	void _sortByAList(void);
 	void _sortBIntoA(void);
 	void _mergeBackPairs(void);
@@ -52,6 +51,7 @@ class VectorSort
 	void _insertionSortRecursive(const ::ssize_t n);
 };
 
+// TODO
 std::ostream &operator<<(std::ostream &os, const std::pair< unsigned int, unsigned int > &p);
 
 #endif /* ****************************************************** VECTORSORT_H */

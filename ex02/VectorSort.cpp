@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:25:26 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 13:51:10 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,32 +82,16 @@ void VectorSort::print(void) const
 	}
 }
 
-std::ostream &operator<<(std::ostream &os, const std::pair< unsigned int, unsigned int > &p)
-{
-	os << "(" << p.first << ", " << p.second << ")";
-	return os;
-}
-
 void VectorSort::_createPairs(void)
 {
 	::size_t j = 0;
 	for (::size_t i = 0; i < _vec.size(); i += 2)
 	{
 		std::pair< unsigned int, unsigned int > p(_vec[i], _vec[i + 1]);
-		_pairs[j] = p;
-		++j;
-	}
-}
-
-void VectorSort::_sortPairs(void)
-{
-	std::pair< unsigned int, unsigned int > &p(_pairs[0]);
-
-	for (::size_t i = 0; i < _pairs.size(); ++i)
-	{
-		p = _pairs[i];
 		if (p.first < p.second)
 			std::swap(p.first, p.second);
+		_pairs[j] = p;
+		++j;
 	}
 }
 
@@ -134,7 +118,8 @@ void VectorSort::_insertionSortRecursive(::ssize_t n)
 	_pairs[j + 1] = last;
 }
 
-::ssize_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::ssize_t left, ::ssize_t right)
+static ::ssize_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::ssize_t left,
+							  ::ssize_t right)
 {
 	if (right <= left)
 		return (target > vec[left]) ? (left + 1) : left;
@@ -217,7 +202,6 @@ void VectorSort::_mergeInsertSort(void)
 	}
 
 	_createPairs();
-	_sortPairs();
 	_sortByAList();
 
 	_vec.clear();

@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:02 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:08:30 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/08 14:28:59 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
 
 void PmergeMe::sort(void)
 {
-	// _list.sort();
-	_vec.sort();
+	_list.sort();
+	// _vec.sort();
 }
 
 static void printArray(char **av)
