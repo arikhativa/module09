@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:27:22 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 13:51:30 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:55:08 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class VectorSort
 	void print(void) const;
 
   private:
+	VectorSort();
 	VectorSort &operator=(VectorSort const &rhs);
 	VectorSort(VectorSort const &src);
 

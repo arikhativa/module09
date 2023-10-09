@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:09 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 12:08:31 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:55:03 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class PmergeMe
 	VectorSort _vec;
 	char **_av;
 
+	PmergeMe();
 	PmergeMe(PmergeMe const &src);
 	PmergeMe &operator=(PmergeMe const &rhs);
 };

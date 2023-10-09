@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:28:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 13:51:10 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:55:07 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static void fillVector(std::vector< unsigned int > &vec, char **numbers)
 		unsigned int tmp = static_cast< unsigned int >(::atol(numbers[i]));
 		vec[i - 1] = tmp;
 	}
+}
+
+VectorSort::VectorSort()
+{
 }
 
 VectorSort::VectorSort(int size, char **numbers)
@@ -69,7 +73,7 @@ void VectorSort::sort(void)
 
 void VectorSort::printTime(void) const
 {
-	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << _t << std::endl;
+	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector : " << _t << std::endl;
 }
 
 void VectorSort::print(void) const

@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:33:06 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/06 16:31:27 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:54:53 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 class RPN
 {
   public:
-    static int evaluate(const std::string &input);
+	static int evaluate(const std::string &input);
 
   private:
-    RPN();
-    RPN(RPN const &src);
-    ~RPN();
-    RPN &operator=(RPN const &rhs);
+	RPN();
+	RPN(RPN const &src);
+	~RPN();
+	RPN &operator=(RPN const &rhs);
 };
 
 #endif /* ************************************************************* RPN_H */

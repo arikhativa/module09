@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:55:03 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 14:29:17 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:54:56 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ ListSort::ListSort(char **numbers)
 		unsigned int tmp = static_cast< unsigned int >(std::atol(numbers[i]));
 		_list.push_back(tmp);
 	}
+}
+
+ListSort::ListSort()
+{
 }
 
 ListSort::ListSort(const ListSort &src)
@@ -64,7 +68,7 @@ void ListSort::sort(void)
 
 void ListSort::printTime(void) const
 {
-	std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << _t << std::endl;
+	std::cout << "Time to process a range of " << _list.size() << " elements with std::list   : " << _t << std::endl;
 }
 
 void ListSort::print(void) const

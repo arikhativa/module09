@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:52:15 by yrabby            #+#    #+#             */
-/*   Updated: 2023/10/08 14:28:52 by yrabby           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:54:57 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class ListSort
 	ssize_t _straggler;
 	Time _t;
 
+	ListSort();
 	ListSort(ListSort const &src);
 	ListSort &operator=(ListSort const &rhs);
 
