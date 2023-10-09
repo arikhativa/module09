@@ -70,7 +70,7 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
 void PmergeMe::sort(void)
 {
 	_list.sort();
-	// _vec.sort();
+	_vec.sort();
 }
 
 static void printArray(char **av)
@@ -89,11 +89,11 @@ void PmergeMe::print(void) const
 	printArray(_av);
 	std::cout << std::endl;
 	std::cout << "After:\t";
-	// _list.print();
-	_vec.print();
+	_list.print();
+	// _vec.print();
 	std::cout << std::endl;
 	_vec.printTime();
-	// _list.printTime();
+	_list.printTime();
 }
 
 /*

@@ -12,12 +12,6 @@
 
 #include "PmergeMe.hpp"
 
-std::ostream &operator<<(std::ostream &os, const std::pair< unsigned int, unsigned int > &p)
-{
-	os << "(" << p.first << ", " << p.second << ")";
-	return os;
-}
-
 int main(int ac, char **av)
 {
 	(void)av;

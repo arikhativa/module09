@@ -118,26 +118,25 @@ void VectorSort::_insertionSortRecursive(::ssize_t n)
 	_pairs[j + 1] = last;
 }
 
-static ::ssize_t binarySearch(const std::vector< unsigned int > &vec, unsigned int target, ::ssize_t left,
-							  ::ssize_t right)
+::ssize_t VectorSort::_binarySearch(unsigned int target, ::ssize_t left, ::ssize_t right)
 {
 	if (right <= left)
-		return (target > vec[left]) ? (left + 1) : left;
+		return (target > _vec[left]) ? (left + 1) : left;
 
 	::ssize_t mid = (left + right) / 2;
 
-	if (target == vec[mid])
+	if (target == _vec[mid])
 		return mid + 1;
 
-	if (target > vec[mid])
-		return binarySearch(vec, target, mid + 1, right);
+	if (target > _vec[mid])
+		return _binarySearch(target, mid + 1, right);
 
-	return binarySearch(vec, target, left, mid - 1);
+	return _binarySearch(target, left, mid - 1);
 }
 
 void VectorSort::_binaryInsert(unsigned int num)
 {
-	::ssize_t pos = binarySearch(_vec, num, 0, _vec.size() - 1);
+	::ssize_t pos = _binarySearch(num, 0, _vec.size() - 1);
 
 	_vec.insert(_vec.begin() + pos, num);
 }

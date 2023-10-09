@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "Jacobsthal.hpp"
+#include "Print.hpp"
 #include "Time.hpp"
 
 class VectorSort
@@ -46,12 +47,10 @@ class VectorSort
 	void _sortBIntoA(void);
 	void _mergeBackPairs(void);
 	void _simpleMergeBackPairs(void);
+	::ssize_t _binarySearch(unsigned int target, ::ssize_t left, ::ssize_t right);
 	void _binaryInsert(unsigned int num);
 	void _mergeInsertSort(void);
 	void _insertionSortRecursive(const ::ssize_t n);
 };
-
-// TODO
-std::ostream &operator<<(std::ostream &os, const std::pair< unsigned int, unsigned int > &p);
 
 #endif /* ****************************************************** VECTORSORT_H */

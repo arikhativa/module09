@@ -14,7 +14,7 @@ NAME 					= PmergeMe
 
 # class
 CLASS_DIR				= .
-CLASS_NAME				=  Time PmergeMe VectorSort ListSort Jacobsthal
+CLASS_NAME				=  Time PmergeMe VectorSort ListSort Jacobsthal Print
 
 # other src
 OTHER_SRC				= 

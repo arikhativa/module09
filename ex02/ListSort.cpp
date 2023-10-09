@@ -119,27 +119,33 @@ void ListSort::_insertionSortRecursive(std::list< std::pair< unsigned int, unsig
 	}
 }
 
-// TODO not static and remove &list
-static ssize_t binarySearch(const std::list< unsigned int > &list, unsigned int target, ssize_t left, ssize_t right)
+::ssize_t ListSort::_binarySearch(unsigned int target, ::ssize_t left, ::ssize_t right)
 {
+	std::list< unsigned int >::const_iterator tmp = _list.begin();
+	std::advance(tmp, left);
+
 	if (right <= left)
-		return (target > *std::next(list.begin(), left)) ? (left + 1) : left;
+		return (target > *tmp ? (left + 1) : left);
 
-	ssize_t mid = (left + right) / 2;
-	std::list< unsigned int >::const_iterator midIterator = std::next(list.begin(), mid);
+	::ssize_t mid = (left + right) / 2;
 
-	if (target == *midIterator)
+	tmp = _list.begin();
+	std::advance(tmp, mid);
+
+	std::list< unsigned int >::const_iterator mid_iterator = tmp;
+
+	if (target == *mid_iterator)
 		return mid + 1;
 
-	if (target > *midIterator)
-		return binarySearch(list, target, mid + 1, right);
+	if (target > *mid_iterator)
+		return _binarySearch(target, mid + 1, right);
 
-	return binarySearch(list, target, left, mid - 1);
+	return _binarySearch(target, left, mid - 1);
 }
 
 void ListSort::_binaryInsert(unsigned int num)
 {
-	::ssize_t pos = binarySearch(_list, num, 0, _list.size() - 1);
+	::ssize_t pos = _binarySearch(num, 0, _list.size() - 1);
 
 	std::list< unsigned int >::iterator it = _list.begin();
 	std::advance(it, pos);
@@ -208,12 +214,8 @@ void ListSort::_mergeInsertSort(void)
 		_list.pop_back();
 	}
 
-	printList< unsigned int >(_list);
 	_createPairs();
-	printList< std::pair< unsigned int, unsigned int > >(_pairs);
 	_sortByAList();
-	printList< std::pair< unsigned int, unsigned int > >(_pairs);
-
 	if (_pairs.size() > 3)
 		_mergeBackPairs();
 	else
@@ -221,8 +223,6 @@ void ListSort::_mergeInsertSort(void)
 
 	if (_straggler != -1)
 		_binaryInsert(static_cast< unsigned int >(_straggler));
-
-	printList< unsigned int >(_list);
 
 	_straggler = -1;
 	_pairs.clear();

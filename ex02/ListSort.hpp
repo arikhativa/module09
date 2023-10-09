@@ -19,6 +19,7 @@
 #include <string>
 
 #include "Jacobsthal.hpp"
+#include "Print.hpp"
 #include "Time.hpp"
 
 class ListSort
@@ -32,8 +33,6 @@ class ListSort
 	void print(void) const;
 
   private:
-	static const std::size_t _THRESHOLD = 100;
-
 	std::list< unsigned int > _list;
 	std::list< std::pair< unsigned int, unsigned int > > _pairs;
 	ssize_t _straggler;
@@ -45,26 +44,12 @@ class ListSort
 	void _createPairs(void);
 	void _sortByAList(void);
 	void _sortBIntoA(void);
+	::ssize_t _binarySearch(unsigned int target, ::ssize_t left, ::ssize_t right);
 	void _mergeBackPairs(void);
 	void _simpleMergeBackPairs(void);
 	void _binaryInsert(unsigned int num);
 	void _mergeInsertSort(void);
 	void _insertionSortRecursive(std::list< std::pair< unsigned int, unsigned int > >::iterator it);
 };
-
-// TODO
-std::ostream &operator<<(std::ostream &os, const std::pair< unsigned int, unsigned int > &p);
-
-template < typename T >
-void printList(const std::list< T > &l)
-{
-	for (typename std::list< T >::const_iterator it = l.begin(); it != l.end(); it++)
-	{
-		std::cout << *it;
-		if (it != --(l.end()))
-			std::cout << " ";
-	}
-	std::cout << std::endl;
-}
 
 #endif /* ******************************************************** LISTSORT_H */

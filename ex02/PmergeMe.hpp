@@ -14,6 +14,7 @@
 #define PMERGEME_HPP
 
 #include "ListSort.hpp"
+#include "Print.hpp"
 #include "VectorSort.hpp"
 
 class PmergeMe
